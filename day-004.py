@@ -20,9 +20,8 @@ def check_val(inp: int, p1: bool):
         return False
 
 
-while min_val < max_val:
-    min_val += 1
-    if check_val(min_val, False):  # change to true for part 1
+for i in range(min_val, max_val): 
+    if check_val(i, False):  # change to true for part 1
         counter += 1
 
 print(counter)
