@@ -1,31 +1,26 @@
 #!/usr/bin/python3
 
-file = open('input.txt').read()
+file = open('day8.txt').read()
 segment = []
 segm = []
 one_counter = 0
 two_counter = 0
 
 
-def draw_msg(ctx):
+def draw(ctx):
     color_str = ""
-    c_zr = 0
-    c_on = 0
-    c_tw = 0
-    for i in ctx:
-        if i == '0':
-            c_zr += 1
-        elif i == '1':
-            c_on += 1
-        elif c_tw == '2':
-            c_tw += 1
-    if c_zr > c_on and c_tw:
-        color_str += "&#9619;"
-    elif c_on > c_zr and c_tw:
-        color_str += "&#9618;"
-    elif c_tw > c_zr and c_on:
-        color_str += "&#9617;"
-    return color_str
+    color_arr = []
+    for i in range(len(ctx)):
+        for j in ctx[i]:
+            if j == '0':
+                color_str += "#"
+            if j == '1':
+                color_str += "%"
+            if j == '2':
+                color_str += " "
+        color_arr.append(color_str)
+        color_str = ""
+    return color_arr
 
 
 # counts zeroes of input
@@ -53,9 +48,11 @@ for i in range(len(segment)):
     segm.append(iterate(segment[i]))
 # end
 
+
 # did this to find which segment had the fewest zeroes
 for l in range(len(segm)):
-    print(draw_msg(segm[l]))
+    print(f"index: {l}\t Zeroes: {count_zeroes(segm[l])}")
+
 
 # next step was to count the number of ones and twos then multiply the counts to get the answer
 # hardcoded the seg with fewest zeroes cba to figure it out automatically
@@ -66,3 +63,14 @@ for q in segm[11]:
         two_counter += 1
 
 print(one_counter*two_counter)
+
+
+# I drew part 2 by hand
+"""
+  ##  ##  #### ###   ##  
+   # #  # #    #  # #  # 
+   # #  # ###  #  # #  # 
+   # #### #    ###  #### 
+#  # #  # #    # #  #  # 
+ ##  #  # #    #  # #  # 
+"""
